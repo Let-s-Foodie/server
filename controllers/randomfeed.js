@@ -13,16 +13,17 @@ exports.getDetail = (req,res,next) => {
     const category = req.body.category;
     const name = req.body.title;
     const area = req.body.area;
-    const latitude = "37.80468";
-    const longitude = "-122.27119";
+
+    const latitude = req.body.lat;
+    const longitude = req.body.lng;
     const categoryarr = [];
     categoryarr.push(category);
     categoryarr.push(area);
    
     searchRequest.categories = category
     searchRequest.term = area
-    // searchRequest.latitude = latitude;
-    // searchRequest.longitude = longitude;
+    searchRequest.latitude = latitude;
+    searchRequest.longitude = longitude;
     
     console.log(searchRequest)
     client.search(searchRequest)
