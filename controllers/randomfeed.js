@@ -19,7 +19,7 @@ exports.getDetail = (req,res,next) => {
     categoryarr.push(category);
     categoryarr.push(area);
    
-    searchRequest.categories = categoryarr
+    searchRequest.categories = category
     searchRequest.term = area
     // searchRequest.latitude = latitude;
     // searchRequest.longitude = longitude;
