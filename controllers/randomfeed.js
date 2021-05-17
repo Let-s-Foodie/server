@@ -9,23 +9,21 @@ const searchRequest = {
 const client = yelp.client(apiKey);
 
 exports.getDetail = (req,res,next) => {
-    console.log(req.body.title)
+    
     const category = req.body.category;
-    const name = req.body.title;
+    //const name = req.body.title;
     const area = req.body.area;
 
     const latitude = req.body.lat;
     const longitude = req.body.lng;
-    const categoryarr = [];
-    categoryarr.push(category);
-    categoryarr.push(area);
+    
    
     searchRequest.categories = category
     searchRequest.term = area
     searchRequest.latitude = latitude;
     searchRequest.longitude = longitude;
     
-    console.log(searchRequest)
+    
     client.search(searchRequest)
         .then(res => {
             const detailResult = res.jsonBody
@@ -43,8 +41,8 @@ exports.getRandom = (req,res,next) => {
    client.search(searchRequest)
         .then(res => {
         const firstResult = res.jsonBody
-       // console.log(res.jsonBody.businesses)
-        const prettyJson = JSON.stringify(firstResult, null,4);
+     
+       
         return firstResult;
     })
         .then(randoms => {
