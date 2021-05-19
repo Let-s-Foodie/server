@@ -3,23 +3,20 @@ const yelp = require('yelp-fusion');
 const apiKey = process.env.API_KEY;
 const searchRequest = {
    
-    location: 'fremont, ca',
+   
     limit: '5'
 }
 const client = yelp.client(apiKey);
 
 exports.getDetail = (req,res,next) => {
     
-    const category = req.body.category;
-    //const name = req.body.title;
-    const area = req.body.area;
-
+   
+    const name = req.body.title;
     const latitude = req.body.lat;
     const longitude = req.body.lng;
     
-   
-    searchRequest.categories = category
-    searchRequest.term = area
+  
+    searchRequest.term = name
     searchRequest.latitude = latitude;
     searchRequest.longitude = longitude;
     
