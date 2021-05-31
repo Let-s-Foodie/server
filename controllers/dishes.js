@@ -11,6 +11,21 @@ exports.getAll = async (req, res) => {
   }
 };
 
+exports.get = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const dish = await Dishes.findOne({
+      where: { id },
+      include: [{ model: Sellers, as: "seller" }],
+    });
+    console.log("SUCCESS: getting dish");
+    return res.status(200).json(dish);
+  } catch (err) {
+    console.log("FAILED: getting dish");
+    return res.status(500).json(err);
+  }
+};
+
 exports.add = async (req, res) => {
   const { sellerId } = req.body;
   // req.body must be include: { sellerId, category, name, image }
