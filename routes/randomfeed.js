@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const randomFeedController = require('../controllers/randomfeed');
-//Get /random/feeds
-router.get('/feeds',randomFeedController.getRandom);
-//Get /random/detail
-router.post('/detail',randomFeedController.getDetail)
+const router = require("express").Router();
+const { getRandom, getDetail } = require("../controllers/randomfeed");
+//GET /random/feeds
+router.get("/feeds", getRandom);
+//GET /random/detail
+router.post("/detail", getDetail);
 module.exports = router;
