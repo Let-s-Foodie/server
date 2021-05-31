@@ -9,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Dishes }) {
       // define association here
-      this.hasMany(Dishes, { foreignKey: "sellerId", as: "dishes" });
+      this.hasMany(Dishes, {
+        foreignKey: "sellerId",
+        as: "dishes",
+        onDelete: "cascade",
+        hooks: true,
+      });
     }
     /* Hide id of the object when is newly created  */
     // toJSON() {
