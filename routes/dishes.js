@@ -1,11 +1,17 @@
 const router = require("express").Router();
-const { getAll, get, add, update, remove } = require("../controllers/dishes");
+const {
+  getAll,
+  getOne,
+  add,
+  update,
+  remove,
+} = require("../controllers/dishes");
 
 // GET all dishes
 router.get("/", getAll);
 
 // GET dish
-router.get("/:id", get);
+router.get("/:id", getOne);
 // CREATE dishes
 router.post("/", add);
 

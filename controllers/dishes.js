@@ -11,7 +11,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
-exports.get = async (req, res) => {
+exports.getOne = async (req, res) => {
   const { id } = req.params;
   try {
     const dish = await Dishes.findOne({
