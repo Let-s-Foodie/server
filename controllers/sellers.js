@@ -1,8 +1,14 @@
 const { Dishes, Sellers } = require("../models");
 
 exports.getAll = async (req, res) => {
+  const { email } = req.user;
   try {
-    const sellers = await Sellers.findAll();
+    const sellers = await Sellers.findAll({
+      where: {
+        userEmail: email,
+      },
+      include: [{ model: Users, as: "user" }],
+    });
     return res.status(200).json(sellers);
   } catch (err) {
     console.log("FAILED: get all sellers");
@@ -11,10 +17,10 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getOne = async (req, res) => {
-  const { id } = req.params;
+  const { sellerId } = req.params;
   try {
     const seller = await Sellers.findOne({
-      where: { id },
+      where: { id: sellerId },
       include: [{ model: Dishes }],
     });
     return res.status(200).json(seller);
@@ -35,11 +41,11 @@ exports.add = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { id } = req.params;
+  const { sellerId } = req.params;
   const { name, lat, lng, instagram, facebook, yelp, homepage, youtube } =
     req.body;
   try {
-    const seller = await Sellers.findOne({ where: { id } });
+    const seller = await Sellers.findOne({ where: { id: sellerId } });
     seller.name = name;
     seller.lat = lat;
     seller.lng = lng;
@@ -58,9 +64,9 @@ exports.update = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  const { id } = req.params;
+  const { sellerId } = req.params;
   try {
-    const seller = await Sellers.findOne({ where: { id } });
+    const seller = await Sellers.findOne({ where: { id: sellerId } });
     await seller.destroy();
     console.log("SUCCESS: delete seller information");
     return res.json(seller);
