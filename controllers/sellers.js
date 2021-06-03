@@ -15,7 +15,7 @@ exports.getOne = async (req, res) => {
   try {
     const seller = await Sellers.findOne({
       where: { id },
-      include: [{ model: Dishes, as: "dishes" }],
+      include: [{ model: Dishes }],
     });
     return res.status(200).json(seller);
   } catch (err) {

@@ -2,19 +2,13 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Sellers extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate({ Dishes }) {
-      // define association here
-      this.hasMany(Dishes, { foreignKey: "sellerId", as: "dishes" });
+      this.hasMany(Dishes, {
+        foreignKey: "sellerId",
+        onDelete: "cascade",
+        hooks: true,
+      });
     }
-    /* Hide id of the object when is newly created  */
-    // toJSON() {
-    //   return { ...this.get(), id: undefined };
-    // }
   }
   Sellers.init(
     {
