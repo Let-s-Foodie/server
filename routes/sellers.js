@@ -8,7 +8,7 @@ const {
 } = require("../controllers/sellers");
 const { authCheck, adminCheck } = require("../middleware/auth");
 
-// GET all sellers info
+// GET all sellers info associated with current user
 router.get("/", authCheck, adminCheck, getAll);
 
 // GET seller info

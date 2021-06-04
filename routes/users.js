@@ -3,3 +3,5 @@ const { add } = require("../controllers/users");
 const { authCheck, adminCheck } = require("../middleware/auth");
 
 router.post("/", authCheck, adminCheck, add);
+
+module.exports = router;

@@ -6,7 +6,7 @@ module.exports = {
       "sellers",
       [
         {
-          userEmail: "test7@test.com",
+          userId: "WjhgPRfcN9XOa5qDJnyAsSLyz713",
           name: "Gordon Ramsay Burger",
           lat: 36.112236803839,
           lng: -115.17215823629,
@@ -20,7 +20,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          userEmail: "test7@test.com",
+          userId: "WjhgPRfcN9XOa5qDJnyAsSLyz713",
           name: "Blu Jam Cafe",
           lat: 34.0837391,
           lng: -118.3505421,
@@ -33,7 +33,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          userEmail: "test7@test.com",
+          userId: "WjhgPRfcN9XOa5qDJnyAsSLyz713",
           name: "Phil's BBQ",
           lat: 32.7338732,
           lng: -117.2041676,
@@ -46,7 +46,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          userEmail: "test1@test.com",
+          userId: "hjCEFcNH2uScexpMd7HBjAgbNqp1",
           name: "Porto's Bakery & Cafe",
           lat: 34.1504741,
           lng: -118.255275,
@@ -59,7 +59,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          userEmail: "test1@test.com",
+          userId: "hjCEFcNH2uScexpMd7HBjAgbNqp1",
           name: "Salt & Straw",
           lat: 34.0243689,
           lng: -118.3937899,

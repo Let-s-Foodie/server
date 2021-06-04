@@ -12,14 +12,14 @@ const { authCheck, adminCheck } = require("../middleware/auth");
 router.get("/", authCheck, adminCheck, getAll);
 
 // GET dish
-router.get("/:id", authCheck, adminCheck, getOne);
+router.get("/:dishId", authCheck, adminCheck, getOne);
 // CREATE dishes
 router.post("/", authCheck, adminCheck, add);
 
 // UPDATE dishes
-router.put("/:id", authCheck, adminCheck, update);
+router.put("/:dishId", authCheck, adminCheck, update);
 
 // DELETE dishes
-router.delete("/:id", authCheck, adminCheck, remove);
+router.delete("/:dishId", authCheck, adminCheck, remove);
 
 module.exports = router;

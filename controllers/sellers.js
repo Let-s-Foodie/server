@@ -1,13 +1,13 @@
-const { Dishes, Sellers } = require("../models");
+const { Dishes, Sellers, Users } = require("../models");
 
 exports.getAll = async (req, res) => {
-  const { email } = req.user;
+  const { uid } = req.user;
   try {
     const sellers = await Sellers.findAll({
       where: {
-        userEmail: email,
+        userId: uid,
       },
-      include: [{ model: Users, as: "user" }],
+      // include: [{ model: Users, as: "user" }],
     });
     return res.status(200).json(sellers);
   } catch (err) {
@@ -30,8 +30,9 @@ exports.getOne = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
+  const { uid } = req.user;
   try {
-    const seller = Sellers.create({ ...req.body });
+    const seller = Sellers.create({ ...req.body, userId: uid });
     console.log("SUCCESS: adding new seller");
     return res.status(200).json(seller);
   } catch (err) {

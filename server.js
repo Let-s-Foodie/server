@@ -5,7 +5,7 @@ const { sequelize } = require("./models");
 const randomFeedRoutes = require("./routes/randomfeed");
 const dishesRoutes = require("./routes/dishes");
 const sellersRoutes = require("./routes/sellers");
-const usersRoutes = require("./routs/users");
+const usersRoutes = require("./routes/users");
 
 require("dotenv").config();
 

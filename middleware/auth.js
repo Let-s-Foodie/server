@@ -1,7 +1,8 @@
 const admin = require("../firebase/firebase.js");
-const Users = require("../models/users");
+const { Users } = require("../models");
 
 exports.authCheck = async (req, res, next) => {
+  console.log(req.headers);
   try {
     const firebaseUser = await admin
       .auth()
@@ -18,7 +19,7 @@ exports.authCheck = async (req, res, next) => {
 exports.adminCheck = async (req, res, next) => {
   const { email } = req.user;
 
-  const adminUser = await Users.findOne({ email });
+  const adminUser = await Users.findOne({ where: { email } });
   if (adminUser.role !== "seller") {
     // code 403 is unauthorized response code.
     res.status(403).json({

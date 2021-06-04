@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
         hooks: true,
       });
     }
-    toJSON() {
-      return { ...this.get(), userId: undefined };
-    }
+    // toJSON() {
+    //   return { ...this.get(), userId: undefined };
+    // }
   }
   Sellers.init(
     {
