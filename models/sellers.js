@@ -2,13 +2,17 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Sellers extends Model {
-    static associate({ Dishes }) {
+    static associate({ Users, Dishes }) {
+      this.belongsTo(Users, { as: "user" });
       this.hasMany(Dishes, {
         foreignKey: "sellerId",
         onDelete: "cascade",
         hooks: true,
       });
     }
+    // toJSON() {
+    //   return { ...this.get(), userId: undefined };
+    // }
   }
   Sellers.init(
     {

@@ -6,19 +6,20 @@ const {
   update,
   remove,
 } = require("../controllers/dishes");
+const { authCheck, adminCheck } = require("../middleware/auth");
 
 // GET all dishes
-router.get("/", getAll);
+router.get("/", authCheck, adminCheck, getAll);
 
 // GET dish
-router.get("/:id", getOne);
+router.get("/:dishId", authCheck, adminCheck, getOne);
 // CREATE dishes
-router.post("/", add);
+router.post("/", authCheck, adminCheck, add);
 
 // UPDATE dishes
-router.put("/:id", update);
+router.put("/:dishId", authCheck, adminCheck, update);
 
 // DELETE dishes
-router.delete("/:id", remove);
+router.delete("/:dishId", authCheck, adminCheck, remove);
 
 module.exports = router;
