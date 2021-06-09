@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Dishes extends Model {
     static associate({ Sellers }) {
       this.belongsTo(Sellers, { as: "seller" });
-      // by default, belongTo created foreign key automatically as sellersId, but since we use as: 'seller', it will be sellerId
+      // by default, belongTo created foreign key automatically as sellersId because since we use as: 'seller', it will be sellerId
     }
 
     toJSON() {

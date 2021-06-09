@@ -12,10 +12,10 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getOne = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
   try {
     const dish = await Dishes.findOne({
-      where: { id },
+      where: { id: dishId },
       include: [{ model: Sellers, as: "seller" }],
     });
     console.log("SUCCESS: getting dish");
@@ -41,11 +41,11 @@ exports.add = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
   const { name, category, image } = req.body;
 
   try {
-    const dish = await Dishes.findOne({ where: { id } });
+    const dish = await Dishes.findOne({ where: { id: dishId } });
     dish.name = name;
     dish.category = category;
     dish.image = image;
@@ -59,10 +59,10 @@ exports.update = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
 
   try {
-    const dish = await Dishes.findOne({ where: { id } });
+    const dish = await Dishes.findOne({ where: { id: dishId } });
     await dish.destroy();
     console.log("SUCCESS: delete dish");
     return res.json(dish);

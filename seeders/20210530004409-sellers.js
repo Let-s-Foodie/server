@@ -6,6 +6,7 @@ module.exports = {
       "sellers",
       [
         {
+          userId: "WjhgPRfcN9XOa5qDJnyAsSLyz713",
           name: "Gordon Ramsay Burger",
           lat: 36.112236803839,
           lng: -115.17215823629,
@@ -15,10 +16,11 @@ module.exports = {
           yelp: "https://www.yelp.com/biz/gordon-ramsay-burger-las-vegas-4",
           youtube: "https://www.youtube.com/watch?v=iM_KMYulI_s",
           homepage: "https://www.gordonramsayrestaurants.com/burger/",
-          createdAt: "2020-11-01T16:30:07.592Z",
-          updatedAt: "2020-11-01T16:30:07.592Z",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
+          userId: "WjhgPRfcN9XOa5qDJnyAsSLyz713",
           name: "Blu Jam Cafe",
           lat: 34.0837391,
           lng: -118.3505421,
@@ -31,6 +33,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: "WjhgPRfcN9XOa5qDJnyAsSLyz713",
           name: "Phil's BBQ",
           lat: 32.7338732,
           lng: -117.2041676,
@@ -43,6 +46,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: "hjCEFcNH2uScexpMd7HBjAgbNqp1",
           name: "Porto's Bakery & Cafe",
           lat: 34.1504741,
           lng: -118.255275,
@@ -55,6 +59,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: "hjCEFcNH2uScexpMd7HBjAgbNqp1",
           name: "Salt & Straw",
           lat: 34.0243689,
           lng: -118.3937899,

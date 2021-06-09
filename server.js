@@ -5,6 +5,7 @@ const { sequelize } = require("./models");
 const randomFeedRoutes = require("./routes/randomfeed");
 const dishesRoutes = require("./routes/dishes");
 const sellersRoutes = require("./routes/sellers");
+const usersRoutes = require("./routes/users");
 
 require("dotenv").config();
 
@@ -27,6 +28,7 @@ server.use((req, res, next) => {
 server.use("/random", randomFeedRoutes);
 server.use("/dishes", dishesRoutes);
 server.use("/sellers", sellersRoutes);
+server.use("/users", usersRoutes);
 
 const port = process.env.PORT || 5000;
 
