@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Let-s-Foodie/Backend#readme",
   "dependencies": {
+    "cloudinary": "^1.25.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
