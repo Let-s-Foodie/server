@@ -2,7 +2,13 @@ const admin = require("../firebase/firebase.js");
 const { Users } = require("../models");
 
 exports.authCheck = async (req, res, next) => {
-  console.log(req.headers);
+  
+  console.log("req.headers",req.headers.authtoken);
+  // console.log(admin.auth().verifyIdToken(
+  //   idToken,true
+
+
+  // ).then(data => console.log(data)))
   try {
     const firebaseUser = await admin
       .auth()
@@ -13,12 +19,13 @@ exports.authCheck = async (req, res, next) => {
     next();
   } catch (err) {
     res.status(401).json({ err: "Invalid or expired token" });
+    
   }
 };
 
 exports.adminCheck = async (req, res, next) => {
   const { email } = req.user;
-
+  console.log(req.user)
   const adminUser = await Users.findOne({ where: { email } });
   if (adminUser.role !== "seller") {
     // code 403 is unauthorized response code.
