@@ -13,6 +13,7 @@ exports.getAll = async (req, res) => {
 
 exports.add = async (req, res) => {
   const { sellerId } = req.body;
+  console.log(req.body)
   // req.body must be include: { sellerId, category, name, image }
   try {
     const seller = await Sellers.findOne({ where: { id: sellerId } });
