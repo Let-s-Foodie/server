@@ -2,11 +2,29 @@ const { Dishes, Sellers } = require("../models");
 
 exports.getAll = async (req, res) => {
   try {
-    const dishes = await Dishes.findAll({
+    const test_dish = await Dishes.findAll({raw: true});
+    console.log("test_dish",test_dish)
+    // const dishes = await Dishes.findAll({
+    //   include: [{ model: Sellers, as: "seller" }],
+    // });
+    
+    return res.status(200).json(test_dish);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+exports.getOne = async (req, res) => {
+  const { dishId } = req.params;
+  try {
+    const dish = await Dishes.findOne({
+      where: { id: dishId },
       include: [{ model: Sellers, as: "seller" }],
     });
-    return res.status(200).json(dishes);
+    console.log("SUCCESS: getting dish");
+    return res.status(200).json(dish);
   } catch (err) {
+    console.log("FAILED: getting dish");
     return res.status(500).json(err);
   }
 };
@@ -27,11 +45,11 @@ exports.add = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
   const { name, category, image } = req.body;
 
   try {
-    const dish = await Dishes.findOne({ where: { id } });
+    const dish = await Dishes.findOne({ where: { id: dishId } });
     dish.name = name;
     dish.category = category;
     dish.image = image;
@@ -45,10 +63,10 @@ exports.update = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
 
   try {
-    const dish = await Dishes.findOne({ where: { id } });
+    const dish = await Dishes.findOne({ where: { id: dishId } });
     await dish.destroy();
     console.log("SUCCESS: delete dish");
     return res.json(dish);

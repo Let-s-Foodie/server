@@ -5,7 +5,8 @@ const { sequelize } = require("./models");
 const randomFeedRoutes = require("./routes/randomfeed");
 const dishesRoutes = require("./routes/dishes");
 const sellersRoutes = require("./routes/sellers");
-const cloudnaryRoutes = require("./routes/cloudinary");
+const usersRoutes = require("./routes/users");
+
 require("dotenv").config();
 
 const server = express();
@@ -27,7 +28,8 @@ server.use((req, res, next) => {
 server.use("/random", randomFeedRoutes);
 server.use("/dishes", dishesRoutes);
 server.use("/sellers", sellersRoutes);
-server.use("/image",cloudnaryRoutes);
+server.use("/users", usersRoutes);
+
 const port = process.env.PORT || 5000;
 
 server.listen(port, async () => {
