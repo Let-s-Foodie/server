@@ -2,10 +2,16 @@ const { Dishes, Sellers } = require("../models");
 
 exports.getAll = async (req, res) => {
   try {
-    const dishes = await Dishes.findAll({
-      include: [{ model: Sellers, as: "seller" }],
-    });
-    return res.status(200).json(dishes);
+    // const dishes = await Dishes.findAll({
+    //   include: [{ model: Sellers, as: "seller" }],
+    // });
+
+    // getAll without any authCheck, or adminCheck
+    const test_dish = await Dishes.findAll({raw: true});
+    console.log("test_dish",test_dish)
+    
+    
+    return res.status(200).json(test_dish);
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -28,6 +34,7 @@ exports.getOne = async (req, res) => {
 
 exports.add = async (req, res) => {
   const { sellerId } = req.body;
+  console.log(req.body)
   // req.body must be include: { sellerId, category, name, image }
   try {
     const seller = await Sellers.findOne({ where: { id: sellerId } });
