@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const { sequelize } = require("./models");
-const randomFeedRoutes = require("./routes/randomfeed");
+const yelpFeedRoutes = require("./routes/yelp");
 const dishesRoutes = require("./routes/dishes");
 const sellersRoutes = require("./routes/sellers");
 const usersRoutes = require("./routes/users");
@@ -25,7 +25,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/random", randomFeedRoutes);
+server.use("/random", yelpFeedRoutes);
 server.use("/dishes", dishesRoutes);
 server.use("/sellers", sellersRoutes);
 server.use("/users", usersRoutes);

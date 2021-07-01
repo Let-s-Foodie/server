@@ -5,7 +5,29 @@ const searchRequest = {
   limit: "5",
 };
 const client = yelp.client(apiKey);
+exports.getLocal = (req, res, next) => {
+  const latitude = req.body.lat;
+  const longitude = req.body.lng;
+  const searchLocal = {
+    limit: "3",
+    latitude: latitude,
+    longitude: longitude,
+    review_count: 1000,
+    rating: 4.5
 
+  }
+  client
+    .search(searchLocal)
+    .then((res)=> {
+      //console.log(res)
+      return res.jsonBody})
+    .catch((e) => {
+      console.log(e);
+    })
+    .then((data) => {
+      res.status(200).json({ message: "get detail title", data: data });
+    });
+}
 exports.getDetail = (req, res, next) => {
   const name = req.body.title;
   const latitude = req.body.lat;

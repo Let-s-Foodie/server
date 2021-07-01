@@ -12,7 +12,6 @@ exports.upload =  async (req, res) => {
 
   try{
    
-   //console.log("req",req.body.data)
     let result = await cloudinary.uploader.upload(req.body.data, {
       image_id: `${Date.now()}`, // id in string format
       resource_type: "auto", // jpeg, png config automatically,
@@ -21,7 +20,7 @@ exports.upload =  async (req, res) => {
       crop:"limit"
     
     });
-    //console.log("cloudinary",result.secure_url)
+    
      return res.status(200).json({
       image_id: result.public_id, // public id will be the id of image
       image_url: result.secure_url, // cloudinary send back to client with image URL
