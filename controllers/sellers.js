@@ -1,4 +1,5 @@
-const { Dishes, Sellers, Users } = require("../models");
+const Dishes = require("../models/dishes");
+const Sellers = require("../models/sellers");
 
 exports.getAll = async (req, res) => {
   const { uid } = req.user;

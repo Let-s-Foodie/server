@@ -1,67 +1,56 @@
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
-  class Sellers extends Model {
-    static associate({ Users, Dishes }) {
-      this.belongsTo(Users, { as: "user" });
-      this.hasMany(Dishes, {
-        foreignKey: "sellerId",
-        onDelete: "cascade",
-        hooks: true,
-      });
-    }
-    // toJSON() {
-    //   return { ...this.get(), userId: undefined };
-    // }
-  }
-  Sellers.init(
-    {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          notNull: { msg: "Seller must have a name" },
-          notEmpty: { msg: "Name must not be empty" },
-        },
-      },
-      lat: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notNull: { msg: "Undefined latitude" },
-          notEmpty: { msg: "Seller must have latitude" },
-        },
-      },
-      lng: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notNull: { msg: "Undefined longitude" },
-          notEmpty: { msg: "Seller must have l" },
-        },
-      },
-      instagram: {
-        type: DataTypes.STRING,
-      },
-      facebook: {
-        type: DataTypes.STRING,
-      },
-      yelp: {
-        type: DataTypes.STRING,
-      },
-      homepage: {
-        type: DataTypes.STRING,
-      },
-      youtube: {
-        type: DataTypes.STRING,
-      },
+const sequelize = require("../db/database");
+const { DataTypes } = require("sequelize");
+const Users = require("./users");
+
+const Sellers = sequelize.define("seller", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notNull: { msg: "Seller must have a name" },
+      notEmpty: { msg: "Name must not be empty" },
     },
-    {
-      sequelize,
-      tableName: "sellers",
-      modelName: "Sellers",
-    }
-  );
-  return Sellers;
-};
+  },
+  lat: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      notNull: { msg: "Undefined latitude" },
+      notEmpty: { msg: "Seller must have latitude" },
+    },
+  },
+  lng: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      notNull: { msg: "Undefined longitude" },
+      notEmpty: { msg: "Seller must have l" },
+    },
+  },
+  instagram: {
+    type: DataTypes.STRING,
+  },
+  facebook: {
+    type: DataTypes.STRING,
+  },
+  yelp: {
+    type: DataTypes.STRING,
+  },
+  homepage: {
+    type: DataTypes.STRING,
+  },
+  youtube: {
+    type: DataTypes.STRING,
+  },
+});
+
+Sellers.belongsTo(Users);
+
+module.exports = Sellers;
