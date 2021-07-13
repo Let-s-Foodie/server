@@ -1,21 +1,22 @@
-const { Dishes, Sellers } = require("../models");
+const Dishes = require("../models/dishes");
+const Sellers = require("../models/sellers");
 
 exports.getAll = async (req, res) => {
   try {
-    const dishes = await Dishes.findAll({
-      include: [{ model: Sellers, as: "seller" }],
-    });
-    return res.status(200).json(dishes);
+    const test_dish = await Dishes.findAll({ raw: true });
+    console.log("test_dish", test_dish);
+
+    return res.status(200).json(test_dish);
   } catch (err) {
     return res.status(500).json(err);
   }
 };
 
 exports.getOne = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
   try {
     const dish = await Dishes.findOne({
-      where: { id },
+      where: { id: dishId },
       include: [{ model: Sellers, as: "seller" }],
     });
     console.log("SUCCESS: getting dish");
@@ -27,11 +28,8 @@ exports.getOne = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
-  const { sellerId } = req.body;
-  // req.body must be include: { sellerId, category, name, image }
   try {
-    const seller = await Sellers.findOne({ where: { id: sellerId } });
-    const dish = await Dishes.create({ ...req.body, sellerId: seller.id });
+    const dish = await Dishes.create({ ...req.body, userId: req.userId });
     console.log("SUCCESS: adding new dish");
     return res.status(200).json(dish);
   } catch (err) {
@@ -41,11 +39,11 @@ exports.add = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
   const { name, category, image } = req.body;
 
   try {
-    const dish = await Dishes.findOne({ where: { id } });
+    const dish = await Dishes.findOne({ where: { id: dishId } });
     dish.name = name;
     dish.category = category;
     dish.image = image;
@@ -59,10 +57,10 @@ exports.update = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  const { id } = req.params;
+  const { dishId } = req.params;
 
   try {
-    const dish = await Dishes.findOne({ where: { id } });
+    const dish = await Dishes.findOne({ where: { id: dishId } });
     await dish.destroy();
     console.log("SUCCESS: delete dish");
     return res.json(dish);

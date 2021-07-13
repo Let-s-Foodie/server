@@ -1,8 +1,15 @@
-const { Dishes, Sellers } = require("../models");
+const Dishes = require("../models/dishes");
+const Sellers = require("../models/sellers");
 
 exports.getAll = async (req, res) => {
+  const { uid } = req.user;
   try {
-    const sellers = await Sellers.findAll();
+    const sellers = await Sellers.findAll({
+      where: {
+        userId: uid,
+      },
+      // include: [{ model: Users, as: "user" }],
+    });
     return res.status(200).json(sellers);
   } catch (err) {
     console.log("FAILED: get all sellers");
@@ -11,10 +18,10 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getOne = async (req, res) => {
-  const { id } = req.params;
+  const { sellerId } = req.params;
   try {
     const seller = await Sellers.findOne({
-      where: { id },
+      where: { id: sellerId },
       include: [{ model: Dishes }],
     });
     return res.status(200).json(seller);
@@ -24,8 +31,9 @@ exports.getOne = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
+  const { uid } = req.user;
   try {
-    const seller = Sellers.create({ ...req.body });
+    const seller = Sellers.create({ ...req.body, userId: uid });
     console.log("SUCCESS: adding new seller");
     return res.status(200).json(seller);
   } catch (err) {
@@ -35,11 +43,11 @@ exports.add = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { id } = req.params;
+  const { sellerId } = req.params;
   const { name, lat, lng, instagram, facebook, yelp, homepage, youtube } =
     req.body;
   try {
-    const seller = await Sellers.findOne({ where: { id } });
+    const seller = await Sellers.findOne({ where: { id: sellerId } });
     seller.name = name;
     seller.lat = lat;
     seller.lng = lng;
@@ -58,9 +66,9 @@ exports.update = async (req, res) => {
 };
 
 exports.remove = async (req, res) => {
-  const { id } = req.params;
+  const { sellerId } = req.params;
   try {
-    const seller = await Sellers.findOne({ where: { id } });
+    const seller = await Sellers.findOne({ where: { id: sellerId } });
     await seller.destroy();
     console.log("SUCCESS: delete seller information");
     return res.json(seller);
