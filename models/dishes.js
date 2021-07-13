@@ -1,6 +1,6 @@
 const sequelize = require("../db/database");
 const { DataTypes } = require("sequelize");
-const Sellers = require("./sellers");
+const Users = require("./Users");
 
 const Dishes = sequelize.define(
   "dishe",
@@ -40,6 +40,6 @@ const Dishes = sequelize.define(
   { timestamps: false }
 );
 
-Dishes.belongsTo(Sellers);
+Dishes.belongsTo(Users);
 
 module.exports = Dishes;

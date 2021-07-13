@@ -28,12 +28,8 @@ exports.getOne = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
-  const { sellerId } = req.body;
-  console.log(req.body);
-  // req.body must be include: { sellerId, category, name, image }
   try {
-    const seller = await Sellers.findOne({ where: { id: sellerId } });
-    const dish = await Dishes.create({ ...req.body, sellerId: seller.id });
+    const dish = await Dishes.create({ ...req.body, userId: req.userId });
     console.log("SUCCESS: adding new dish");
     return res.status(200).json(dish);
   } catch (err) {
