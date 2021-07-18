@@ -4,8 +4,7 @@ exports.add = async (req, res) => {
   const { email } = req.body;
  
   const { role } = req.body;
-  console.log("role",role)
-  console.log("email",email)
+ 
   
   try {
     const user = await Users.create({ email, role });
@@ -18,15 +17,15 @@ exports.add = async (req, res) => {
 };
 //test firebase 
 exports.loginStatus = async (req, res) => {
-  console.log("test firebase")
-  
-  try {
-    const firebaseUser = await admin
-      .auth()
-      .getUser("ASNaAKiQZBe3bd03dQPD2XNwdrS2")
-      .then((data) => console.log("backend firebase test",data))
-  } catch (err) {
-    console.log("firebase test error",err)
-  }
+  //console.log("test firebase")
+  console.log("test headers",req.headers)
+  // try {
+  //   const firebaseUser = await admin
+  //     .auth()
+  //     .getUser("ASNaAKiQZBe3bd03dQPD2XNwdrS2")
+  //     .then((data) => console.log("backend firebase test",data))
+  // } catch (err) {
+  //   console.log("firebase test error",err)
+  // }
 };
 

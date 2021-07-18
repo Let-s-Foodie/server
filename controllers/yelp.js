@@ -1,6 +1,7 @@
 require("dotenv").config();
 const yelp = require("yelp-fusion");
-const apiKey = process.env.API_KEY;
+const apiKey = process.env.YELP_API_KEY;
+
 const searchRequest = {
   limit: "5",
 };
@@ -19,13 +20,14 @@ exports.getLocal = (req, res, next) => {
   client
     .search(searchLocal)
     .then((res)=> {
-      //console.log(res)
+   
       return res.jsonBody})
     .catch((e) => {
       console.log(e);
     })
     .then((data) => {
-      res.status(200).json({ message: "get detail title", data: data });
+      
+      res.status(200).json({ message: "get local favorites", data: data });
     });
 }
 exports.getDetail = (req, res, next) => {
