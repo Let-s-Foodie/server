@@ -1,9 +1,9 @@
-const sequelize = require("../db/database");
-const { DataTypes } = require("sequelize");
-const Users = require("./Users");
+const sequelize = require('../db/database')
+const { DataTypes } = require('sequelize')
+const Sellers = require('./Sellers')
 
 const Dishes = sequelize.define(
-  "dishe",
+  'dishe',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -16,30 +16,30 @@ const Dishes = sequelize.define(
       allowNull: false,
       unique: true,
       validate: {
-        notNull: { msg: "Dishes must have name" },
-        notEmpty: { msg: "Name cannot be empty" },
+        notNull: { msg: 'Dishes must have name' },
+        notEmpty: { msg: 'Name cannot be empty' },
       },
     },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: { msg: "Dishes must have image" },
-        notEmpty: { msg: "Image cannot be empty" },
+        notNull: { msg: 'Dishes must have image' },
+        notEmpty: { msg: 'Image cannot be empty' },
       },
     },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: { msg: "Dishes must have category" },
-        notEmpty: { msg: "Category cannot be empty" },
+        notNull: { msg: 'Dishes must have category' },
+        notEmpty: { msg: 'Category cannot be empty' },
       },
     },
   },
-  { timestamps: false }
-);
+  { timestamps: false },
+)
 
-Dishes.belongsTo(Users);
+Dishes.belongsTo(Sellers)
 
-module.exports = Dishes;
+module.exports = Dishes

@@ -1,8 +1,8 @@
-const sequelize = require("../db/database");
-const { DataTypes } = require("sequelize");
-const Users = require("./users");
+const sequelize = require('../db/database')
+const { DataTypes } = require('sequelize')
+const Users = require('./users')
 
-const Sellers = sequelize.define("seller", {
+const Sellers = sequelize.define('seller', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -14,24 +14,24 @@ const Sellers = sequelize.define("seller", {
     allowNull: false,
     unique: true,
     validate: {
-      notNull: { msg: "Seller must have a name" },
-      notEmpty: { msg: "Name must not be empty" },
+      notNull: { msg: 'Seller must have a name' },
+      notEmpty: { msg: 'Name must not be empty' },
     },
   },
   lat: {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      notNull: { msg: "Undefined latitude" },
-      notEmpty: { msg: "Seller must have latitude" },
+      notNull: { msg: 'Undefined latitude' },
+      notEmpty: { msg: 'Seller must have latitude' },
     },
   },
   lng: {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      notNull: { msg: "Undefined longitude" },
-      notEmpty: { msg: "Seller must have l" },
+      notNull: { msg: 'Undefined longitude' },
+      notEmpty: { msg: 'Seller must have l' },
     },
   },
   instagram: {
@@ -49,8 +49,11 @@ const Sellers = sequelize.define("seller", {
   youtube: {
     type: DataTypes.STRING,
   },
-});
+})
 
-Sellers.belongsTo(Users);
+Sellers.belongsTo(Users, {
+  onDelete: 'cascade',
+  hooks: true,
+})
 
-module.exports = Sellers;
+module.exports = Sellers

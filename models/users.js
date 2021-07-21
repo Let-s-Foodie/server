@@ -1,7 +1,7 @@
-const sequelize = require("../db/database");
-const { DataTypes } = require("sequelize");
+const sequelize = require('../db/database')
+const { DataTypes } = require('sequelize')
 
-const Users = sequelize.define("user", {
+const Users = sequelize.define('user', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -12,18 +12,18 @@ const Users = sequelize.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      notNull: { msg: "User must have a email from Firebase account" },
-      notEmpty: { msg: "Email must not be empty" },
+      notNull: { msg: 'User must have a email from Firebase account' },
+      notEmpty: { msg: 'Email must not be empty' },
     },
   },
   role: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      notNull: { msg: "User must have a role" },
-      notEmpty: { msg: "Role must not be empty" },
+      notNull: { msg: 'User must have a role' },
+      notEmpty: { msg: 'Role must not be empty' },
     },
   },
-});
+})
 
-module.exports = Users;
+module.exports = Users
