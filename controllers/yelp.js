@@ -1,6 +1,6 @@
 require("dotenv").config();
 const yelp = require("yelp-fusion");
-const apiKey = process.env.API_KEY;
+const apiKey = process.env.YELP_API_KEY;
 const searchRequest = {
   limit: "5",
 };
