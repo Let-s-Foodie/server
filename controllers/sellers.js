@@ -42,12 +42,15 @@ exports.getSellers = async (req, res) => {
 
 exports.add = async (req, res) => {
   const { userId } = req
+  
   try {
     const seller = await Sellers.create({ ...req.body, userId })
+
     console.log('SUCCESS: adding new seller')
     return res.status(200).json(seller)
   } catch (err) {
     console.log('FAILED: adding new seller')
+    console.log(...req.body + " " + userId)
     return res.status(500).json(err)
   }
 }
