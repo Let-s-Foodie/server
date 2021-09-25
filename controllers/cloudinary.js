@@ -1,5 +1,5 @@
 const cloudinary = require("cloudinary");
-
+const path = require('path');
 // config
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,7 +9,7 @@ cloudinary.config({
 
 // req.files.file.path
 exports.upload =  async (req, res) => {
-
+ 
   try{
    
     let result = await cloudinary.uploader.upload(req.body.data, {

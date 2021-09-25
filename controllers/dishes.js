@@ -3,11 +3,14 @@ const Sellers = require("../models/sellers");
 
 exports.getAll = async (req, res) => {
   try {
-    const test_dish = await Dishes.findAll({ raw: true });
-    console.log("test_dish", test_dish);
+    const dish = await Dishes.findAll({ raw: true });
+   
+    console.log("test_dish", dish);
 
-    return res.status(200).json(test_dish);
+    return res.status(200).json(dish);
   } catch (err) {
+    console.log("getAll err")
+    console.log(err)
     return res.status(500).json(err);
   }
 };
@@ -28,12 +31,18 @@ exports.getOne = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
+  
+  console.log("#########req.userId",req.userId)
+  console.log("######req.body",req.body)
+  
+ 
   try {
-    const dish = await Dishes.create({ ...req.body, userId: req.userId });
+    const dish = await Dishes.create({...req.body});
     console.log("SUCCESS: adding new dish");
     return res.status(200).json(dish);
   } catch (err) {
     console.log("FAILED: adding new dish");
+    console.log(err)
     return res.status(500).json(err);
   }
 };

@@ -10,7 +10,7 @@ const {
 const { authCheck, adminCheck } = require("../middleware/auth");
 
 // GET all dishes
-router.get("/", getAll);
+router.get("/", getAll); 
 
 // GET dish
 router.get("/:dishId", authCheck, adminCheck, getOne);

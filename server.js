@@ -6,6 +6,7 @@ const yelpFeedRoutes = require('./routes/yelp')
 const dishesRoutes = require('./routes/dishes')
 const sellersRoutes = require('./routes/sellers')
 const usersRoutes = require('./routes/users')
+const imageRoutes = require('./routes/cloudinary');
 const sequelize = require('./db/database')
 const config = require('./config/config')
 
@@ -14,7 +15,8 @@ require('dotenv').config()
 const server = express()
 
 server.use(morgan('dev'))
-server.use(express.json())
+server.use(express.json({limit: '50mb'}))
+server.use(express.urlencoded({limit: '50mb'}))
 server.use(helmet())
 server.use(cors())
 
@@ -27,12 +29,14 @@ server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   next()
 })
-
+server.use('/image',imageRoutes);
 server.use('/random', yelpFeedRoutes)
 server.use('/dishes', dishesRoutes)
 server.use('/sellers', sellersRoutes)
 server.use('/users', usersRoutes)
 
+
+//server.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}));
 sequelize.sync().then(() => {
   // force: true 는 내가 server 를 restart 할때마다 모든 table 들을 drop/create 을 database 에서 해준다
   server.listen(config.host.port, async () => {

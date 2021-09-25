@@ -11,7 +11,7 @@ const {
 const { authCheck, adminCheck } = require('../middleware/auth')
 
 // GET all sellers info associated with current user
-router.get('/', getAll)
+router.get('/',getAll)
 
 // GET seller info
 router.get('/:sellerId', getOne)

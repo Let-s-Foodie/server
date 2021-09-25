@@ -4,7 +4,7 @@ const Users = require('../models/users')
 exports.authCheck = async (req, res, next) => {
   try {
     const firebaseUser = await admin.auth().verifyIdToken(req.headers.authtoken)
-    console.log('FIREBASE USER IN AUTHCHECK', firebaseUser)
+   // console.log('FIREBASE USER IN AUTHCHECK', firebaseUser)
     req.firebaseUser = firebaseUser
     next()
   } catch (err) {
@@ -13,16 +13,20 @@ exports.authCheck = async (req, res, next) => {
 }
 
 exports.adminCheck = async (req, res, next) => {
-  const { email } = req.firebaseUser
+  const firebaseUser = await admin.auth().verifyIdToken(req.headers.authtoken)
+  
+  const { email } = firebaseUser
   const adminUser = await Users.findOne({ where: { email } })
-  console.log('@@@@@@@@\n', adminUser)
+  //console.log('@@@@@@@@\n', adminUser)
 
   if (adminUser.role !== 'seller') {
-    res.status(403).json({
+    return res.status(403).json({
       err: 'Admin resource. Access denied.',
     })
   } else {
     req.userId = adminUser.dataValues.id
+    req.params.id = adminUser.dataValues.id
+   // console.log('@@@@@',req.userId)
     next()
   }
 }

@@ -24,8 +24,11 @@ exports.getOne = async (req, res) => {
 }
 
 exports.getSellers = async (req, res) => {
-  console.log('_________________', req.params.id)
-  const { userId } = req.params
+  //console.log('@@@@',req.userId)
+   console.log('_________________', req.params.id)
+   //const { userId } = req.params.id
+   const userId = req.params.id
+  //const userId = req.userId
   try {
     const sellers = await Sellers.findAll({
       where: {
