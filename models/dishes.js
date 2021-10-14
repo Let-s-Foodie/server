@@ -1,6 +1,6 @@
 const sequelize = require('../db/database')
 const { DataTypes } = require('sequelize')
-const Sellers = require('./Sellers')
+const Sellers = require('./sellers')
 
 const Dishes = sequelize.define(
   'dishes',

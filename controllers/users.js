@@ -41,7 +41,6 @@ exports.remove = async (req, res) => {
   const user = await Users.findOne({ where: { id } })
 
   if (!user) return res.status(404).json({ message: 'Cannot find user info' })
-  console.log(user.dataValues, req.firebaseUser)
   if (user.dataValues.email !== req.firebaseUser.email)
     return res.sendStatus(403)
   await user.destroy()

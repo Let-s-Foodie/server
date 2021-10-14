@@ -13,12 +13,12 @@ exports.authCheck = async (req, res, next) => {
 }
 
 exports.adminCheck = async (req, res, next) => {
+  
   const firebaseUser = await admin.auth().verifyIdToken(req.headers.authtoken)
   
   const { email } = firebaseUser
   const adminUser = await Users.findOne({ where: { email } })
-  //console.log('@@@@@@@@\n', adminUser)
-
+ 
   if (adminUser.role !== 'seller') {
     return res.status(403).json({
       err: 'Admin resource. Access denied.',
