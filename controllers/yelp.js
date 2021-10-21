@@ -49,15 +49,20 @@ exports.getDetail = (req, res, next) => {
       res.status(200).json({ message: "get detail title", data: data });
     });
 };
-exports.getRandom = (req, res, next) => {
+exports.getAll = (req, res, next) => {
+  const latitude = req.body.lat;
+  const longitude = req.body.lng;
+
+  searchRequest.latitude = latitude;
+  searchRequest.longitude = longitude;
   client
     .search(searchRequest)
     .then((res) => {
-      const firstResult = res.jsonBody;
-
-      return firstResult;
+      const firstResult = res.jsonBody.businesses;
+      return firstResult.map(item => ({...item, image: item.image_url,category: item.categories[0].alias, sellerId: "yelp"}));
     })
     .then((randoms) => {
+      console.log(randoms)
       res.status(200).json({
         message: "Fetched posts successfully",
         data: randoms,

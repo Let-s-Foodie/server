@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { getRandom, getDetail,getLocal } = require("../controllers/yelp");
+const { getAll, getDetail,getLocal } = require("../controllers/yelp");
 //GET /random/feeds
-router.get("/feeds", getRandom);
+router.post("/feeds", getAll);
 //GET /random/detail
 router.post("/detail", getDetail);
 router.post("/local", getLocal);
