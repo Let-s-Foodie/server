@@ -54,7 +54,7 @@ exports.getRandom = (req, res, next) => {
     .search(searchRequest)
     .then((res) => {
       const firstResult = res.jsonBody;
-
+      console.log(firstResult)
       return firstResult;
     })
     .then((randoms) => {
