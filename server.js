@@ -28,7 +28,7 @@ server.use((req, res, next) => {
   next()
 })
 
-server.use('/random', yelpFeedRoutes)
+server.use('/yelp', yelpFeedRoutes)
 server.use('/dishes', dishesRoutes)
 server.use('/sellers', sellersRoutes)
 server.use('/users', usersRoutes)
