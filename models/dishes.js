@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize')
 const Sellers = require('./sellers')
 
 const Dishes = sequelize.define(
-  'dishe',
+  'dishes',
   {
     id: {
       type: DataTypes.INTEGER,
