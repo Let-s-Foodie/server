@@ -47,3 +47,8 @@ exports.remove = async (req, res) => {
   console.log('SUCCESS: delete user information')
   return res.status(200).json(user)
 }
+exports.signin = async (req,res) => {
+  const data = req.body
+  
+  return res.status(200).json(data.data)
+}

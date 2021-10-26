@@ -29,8 +29,9 @@ exports.getOne = async (req, res) => {
 
 exports.add = async (req, res) => {
   const { sellerId } = req.params
+  console.log("sellerId",sellerId)
   try {
-    const dish = await Dishes.create({ ...req.body, sellerId })
+    const dish = await Dishes.create({ ...req.body,sellerId})
     console.log('SUCCESS: adding new dish')
     return res.status(200).json(dish)
   } catch (err) {
