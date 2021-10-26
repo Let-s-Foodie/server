@@ -2,7 +2,7 @@ require("dotenv").config();
 const yelp = require("yelp-fusion");
 const apiKey = process.env.YELP_API_KEY;
 const searchRequest = {
-  limit: "5",
+  limit: "50",
 };
 const client = yelp.client(apiKey);
 exports.getLocal = (req, res, next) => {
@@ -49,13 +49,16 @@ exports.getDetail = (req, res, next) => {
       res.status(200).json({ message: "get detail title", data: data });
     });
 };
-exports.getRandom = (req, res, next) => {
+exports.getAll = (req, res, next) => {
+  const lat = req.body.lat;
+  const lng = req.body.lng
+  searchRequest.latitude = lat;
+  searchRequest.longitude = lng;
   client
     .search(searchRequest)
     .then((res) => {
-      const firstResult = res.jsonBody;
-
-      return firstResult;
+      const firstResult = res.jsonBody.businesses;
+      return firstResult.map(item => ({...item,image:item.image_url,category: item.categories[0].alias, sellerId: "yelp"}));
     })
     .then((randoms) => {
       res.status(200).json({

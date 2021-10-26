@@ -29,8 +29,9 @@ server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   next()
 })
+
+server.use('/yelp', yelpFeedRoutes)
 server.use('/image',imageRoutes);
-server.use('/random', yelpFeedRoutes)
 server.use('/dishes', dishesRoutes)
 server.use('/sellers', sellersRoutes)
 server.use('/users', usersRoutes)
