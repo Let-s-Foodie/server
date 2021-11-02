@@ -22,6 +22,7 @@ exports.adminCheck = async (req, res, next) => {
   if (adminUser.role !== 'seller') {
     return res.status(403).json({
       err: 'Admin resource. Access denied.',
+      role: "user"
     })
   } else {
     req.userId = adminUser.dataValues.id

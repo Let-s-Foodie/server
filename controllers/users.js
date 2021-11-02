@@ -50,5 +50,8 @@ exports.remove = async (req, res) => {
 exports.signin = async (req,res) => {
   const data = req.body
   
-  return res.status(200).json(data.data)
+  return res.status(200).json({
+    data:data.data,
+    role:"seller"
+  })
 }
