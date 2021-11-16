@@ -22,7 +22,7 @@ exports.add = async (req, res) => {
 exports.update = async (req, res) => {
   const { id } = req.params
   const { role } = req.body
-
+  console.log()
   try {
     const user = await Users.findOne({ where: { id } })
     user.role = role
@@ -47,11 +47,11 @@ exports.remove = async (req, res) => {
   console.log('SUCCESS: delete user information')
   return res.status(200).json(user)
 }
-exports.signin = async (req,res) => {
+exports.signin = async (req, res) => {
   const data = req.body
-  
+
   return res.status(200).json({
-    data:data.data,
-    role:"seller"
+    data: data.data,
+    role: 'seller',
   })
 }
